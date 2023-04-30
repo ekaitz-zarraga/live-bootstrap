@@ -119,8 +119,8 @@ def main():
         raise ValueError("One of qemu, chroot, bwrap, or bare metal must be selected.")
 
     # Arch validation
-    if args.arch != "x86":
-        raise ValueError("Only x86 is supported at the moment.")
+    #if args.arch != "x86" and args.arch != "amd64":
+    #    raise ValueError("Only x86 is supported at the moment.")
 
     # Tmp validation
     if args.bwrap and args.tmpfs:
@@ -194,6 +194,7 @@ print(shutil.which('chroot'))
                      '--dev-bind', '/dev/zero', '/dev/zero',
                      '--dev-bind', '/dev/random', '/dev/random',
                      '--dev-bind', '/dev/urandom', '/dev/urandom',
+                     '--bind', '/usr/bin/qemu-riscv64', '/usr/bin/qemu-riscv64',
                      init)
 
         run('bwrap', '--unshare-user',
